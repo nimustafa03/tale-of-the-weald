@@ -1,0 +1,31 @@
+[gd_scene load_steps=6 format=3 uid="uid://c5xblrrwat1e4"]
+
+[ext_resource type="PackedScene" uid="uid://cfmgsgc4u1jw2" path="res://scenes/player_character.tscn" id="1_0wfyh"]
+[ext_resource type="Texture2D" uid="uid://daexxcuj361l8" path="res://addons/kenney_prototype_textures/orange/texture_01.png" id="1_o5qli"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_0wfyh"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_sugp2"]
+albedo_texture = ExtResource("1_o5qli")
+uv1_scale = Vector3(5, 5, 5)
+
+[sub_resource type="HeightMapShape3D" id="HeightMapShape3D_0wfyh"]
+
+[node name="main" type="Node3D"]
+
+[node name="playerCharacter" parent="." instance=ExtResource("1_0wfyh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.859147, 0)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D"]
+transform = Transform3D(20, 0, 0, 0, 20, 0, 0, 0, 20, 0, 0, 0)
+mesh = SubResource("PlaneMesh_0wfyh")
+surface_material_override/0 = SubResource("StandardMaterial3D_sugp2")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+transform = Transform3D(40, 0, 0, 0, 40, 0, 0, 0, 40, 0, 0, 0)
+shape = SubResource("HeightMapShape3D_0wfyh")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.941241, 0.337736, 0, -0.337736, 0.941241, -3.60479, 8.47846, 17.9519)
