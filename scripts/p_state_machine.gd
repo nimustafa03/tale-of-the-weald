@@ -23,10 +23,26 @@ func process_physics(delta):
 	var new_state = current_state.process_physics(delta)
 	if new_state:
 		change_state(new_state)
-	if Input.is_action_just_pressed("camera_moveleft") and !is_camera_moving:
+	if Input.is_action_just_pressed("camera_moveleft"):
 		rotate_camera("left")
-	if Input.is_action_just_pressed("camera_moveright") and !is_camera_moving:
+	if Input.is_action_just_pressed("camera_moveright"):
 		rotate_camera("right")
+	if Input.is_action_just_pressed("camera_forward"):
+		camera_zoom(false, delta)
+	if Input.is_action_just_pressed("camera_back"):
+		camera_zoom(true, delta)
+
+func camera_zoom(direction : bool, delta : float):
+	var increment = -5
+	if direction == true:
+		increment = -increment
+	var max_zoom = 5
+	var min_zoom = 15
+	
+	if (spring_arm.spring_length-0.5 >= max_zoom and increment < 0) or (spring_arm.spring_length+0.5 <= min_zoom and increment > 0):
+		spring_arm.spring_length = move_toward(spring_arm.spring_length, spring_arm.spring_length+increment,0.5)
+	
+
 
 func rotate_camera(direction : String):
 	var degs : float = +45

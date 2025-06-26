@@ -11,7 +11,12 @@ func _enter():
 	super()
 
 func process_physics(delta):
-	parent.velocity.y -= gravity * delta
+	parent.velocity.y -= gravity *0.75 * delta
+	
+	if !Input.is_action_pressed("jump"):
+		parent.velocity.y -= gravity * delta
+	if parent.velocity.y <= 0:
+		parent.velocity.y -= gravity *2 * delta
 	
 	InputMove(delta, spring_arm)
 	

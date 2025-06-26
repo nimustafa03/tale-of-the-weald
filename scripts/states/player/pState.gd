@@ -5,7 +5,7 @@ class_name pState ##p(layer)State
 ##Variables Exportadas
 
 @export var animation_name : String
-@export var move_speed : float = 7.5
+@export var move_speed : float = 10
 @export var slide : float = 4
 @export var jump_speed : float = 30
 @export var gravity : int = 50
@@ -34,7 +34,7 @@ func InputMove(delta, spring_arm : SpringArm3D):
 	parent.velocity = lerp(parent.velocity, direction * move_speed, slide * delta)
 
 func flipSprite():
-	if Input.is_action_pressed("moveleft") or Input.is_action_just_released("moveleft"):
+	if Input.is_action_just_pressed("moveleft"):
 		parent.animations.flip_h = true
-	if Input.is_action_just_pressed("moveright") or Input.is_action_just_released("moveright"):
+	if Input.is_action_just_pressed("moveright"):
 		parent.animations.flip_h = false

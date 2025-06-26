@@ -3,6 +3,7 @@ class_name Player
 
 @onready var animations = $AnimatedSprite3D
 @onready var state_machine = $pStateMachine
+@onready var springArm3D = $SpringArm3D
 
 func _ready():
 	state_machine.init(self)

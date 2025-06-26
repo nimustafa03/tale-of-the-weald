@@ -1,0 +1,114 @@
+[gd_scene load_steps=12 format=3 uid="uid://c5xblrrwat1e4"]
+
+[ext_resource type="PackedScene" uid="uid://cfmgsgc4u1jw2" path="res://scenes/player_character.tscn" id="1_j8ivh"]
+[ext_resource type="Script" uid="uid://nkrwr7uqj21t" path="res://scripts/label.gd" id="2_7ddre"]
+[ext_resource type="Texture2D" uid="uid://daexxcuj361l8" path="res://addons/kenney_prototype_textures/orange/texture_01.png" id="2_nd71p"]
+[ext_resource type="Script" uid="uid://dghq27ecpj7qa" path="res://scenes/springlengthlabel.gd" id="2_qjeyg"]
+[ext_resource type="Texture2D" uid="uid://dsrngh0jrtivi" path="res://addons/kenney_prototype_textures/purple/texture_01.png" id="5_qjeyg"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_0wfyh"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_sugp2"]
+albedo_texture = ExtResource("2_nd71p")
+uv1_scale = Vector3(5, 5, 5)
+
+[sub_resource type="HeightMapShape3D" id="HeightMapShape3D_0wfyh"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_qjeyg"]
+size = Vector3(3, 1, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3qnke"]
+albedo_texture = ExtResource("5_qjeyg")
+
+[sub_resource type="BoxMesh" id="BoxMesh_7ddre"]
+
+[node name="main" type="Node3D"]
+
+[node name="playerCharacter" parent="." instance=ExtResource("1_j8ivh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.859147, 0)
+
+[node name="springlengthlabel" type="Label" parent="playerCharacter" node_paths=PackedStringArray("parent")]
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -426.0
+offset_right = 210.0
+offset_bottom = -381.0
+grow_vertical = 2
+size_flags_horizontal = 4
+script = ExtResource("2_qjeyg")
+parent = NodePath("..")
+
+[node name="Label" type="Label" parent="playerCharacter" node_paths=PackedStringArray("parent")]
+offset_right = 210.0
+offset_bottom = 45.0
+script = ExtResource("2_7ddre")
+parent = NodePath("..")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.941241, 0.337736, 0, -0.337736, 0.941241, -3.60479, 8.47846, 17.9519)
+
+[node name="testgrounds" type="Node3D" parent="."]
+
+[node name="floor" type="StaticBody3D" parent="testgrounds"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="testgrounds/floor"]
+transform = Transform3D(64, 0, 0, 0, 20, 0, 0, 0, 64, 0, 0, 0)
+mesh = SubResource("PlaneMesh_0wfyh")
+surface_material_override/0 = SubResource("StandardMaterial3D_sugp2")
+metadata/_edit_group_ = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="testgrounds/floor"]
+transform = Transform3D(128, 0, 0, 0, 128, 0, 0, 0, 128, 0, 0, 0)
+shape = SubResource("HeightMapShape3D_0wfyh")
+metadata/_edit_group_ = true
+
+[node name="parkour" type="Node3D" parent="testgrounds"]
+
+[node name="platform1" type="StaticBody3D" parent="testgrounds/parkour"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.824, 1.76718, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="testgrounds/parkour/platform1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.002, 0, 0)
+shape = SubResource("BoxShape3D_qjeyg")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="testgrounds/parkour/platform1"]
+transform = Transform3D(3, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+material_override = SubResource("StandardMaterial3D_3qnke")
+mesh = SubResource("BoxMesh_7ddre")
+
+[node name="platform2" type="StaticBody3D" parent="testgrounds/parkour"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.824, 3.75054, -3.80948)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="testgrounds/parkour/platform2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.002, 0, 0)
+shape = SubResource("BoxShape3D_qjeyg")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="testgrounds/parkour/platform2"]
+transform = Transform3D(3, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+material_override = SubResource("StandardMaterial3D_3qnke")
+mesh = SubResource("BoxMesh_7ddre")
+
+[node name="platform3" type="StaticBody3D" parent="testgrounds/parkour"]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -8.07973, 3.75054, -6.84382)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="testgrounds/parkour/platform3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.002, 0, 0)
+shape = SubResource("BoxShape3D_qjeyg")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="testgrounds/parkour/platform3"]
+transform = Transform3D(3, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+material_override = SubResource("StandardMaterial3D_3qnke")
+mesh = SubResource("BoxMesh_7ddre")
+
+[node name="platform4" type="StaticBody3D" parent="testgrounds/parkour"]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -4.16224, 5.64848, -6.84382)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="testgrounds/parkour/platform4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.002, 0, 0)
+shape = SubResource("BoxShape3D_qjeyg")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="testgrounds/parkour/platform4"]
+transform = Transform3D(3, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+material_override = SubResource("StandardMaterial3D_3qnke")
+mesh = SubResource("BoxMesh_7ddre")

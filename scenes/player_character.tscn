@@ -1,4 +1,4 @@
-[gd_scene load_steps=36 format=3 uid="uid://cfmgsgc4u1jw2"]
+[gd_scene load_steps=35 format=3 uid="uid://cfmgsgc4u1jw2"]
 
 [ext_resource type="Script" uid="uid://dn2xyye3lsd5a" path="res://scripts/player_character.gd" id="1_56udc"]
 [ext_resource type="Texture2D" uid="uid://ct0g5ostm8uba" path="res://addons/placeholders/Idle (32x32).png" id="2_4h0vy"]
@@ -8,7 +8,6 @@
 [ext_resource type="Script" uid="uid://bjsrjc103j41m" path="res://scripts/states/player/p_idle.gd" id="6_6unfe"]
 [ext_resource type="Script" uid="uid://bsrmhtmduvfwt" path="res://scripts/states/player/p_run.gd" id="7_pxja8"]
 [ext_resource type="Script" uid="uid://bqwxl81bf401h" path="res://scripts/states/player/p_jump.gd" id="8_pxja8"]
-[ext_resource type="Script" uid="uid://nkrwr7uqj21t" path="res://scripts/label.gd" id="9_iadup"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_uj7mf"]
 radius = 0.50769
@@ -219,7 +218,7 @@ animation = &"idle"
 
 [node name="SpringArm3D" type="SpringArm3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.866025, 0.5, 0, -0.5, 0.866025, 0, 0, 0)
-spring_length = 5.0
+spring_length = 6.0
 
 [node name="Camera3D" type="Camera3D" parent="SpringArm3D"]
 
@@ -251,9 +250,3 @@ run_state = NodePath("../pRun")
 spring_arm = NodePath("../../SpringArm3D")
 animation_name = "jump"
 metadata/_custom_type_script = "uid://bbk7hmc17x0uu"
-
-[node name="Label" type="Label" parent="pStateMachine" node_paths=PackedStringArray("parent")]
-offset_right = 210.0
-offset_bottom = 45.0
-script = ExtResource("9_iadup")
-parent = NodePath("..")
