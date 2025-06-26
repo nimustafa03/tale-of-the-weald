@@ -5,7 +5,7 @@ class_name pState ##p(layer)State
 ##Variables Exportadas
 
 @export var animation_name : String
-@export var move_speed : float = 10
+@export var move_speed : float = 15
 @export var slide : float = 4
 @export var jump_speed : float = 30
 @export var gravity : int = 50

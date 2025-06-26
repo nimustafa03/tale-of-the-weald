@@ -3,6 +3,7 @@ extends Node
 @export var initial_state : pState
 @export var spring_arm : SpringArm3D
 @export var player : Player
+@export var pDie : pState
 
 var current_state : pState
 var is_camera_moving : bool = false
@@ -41,7 +42,6 @@ func camera_zoom(direction : bool, delta : float):
 	
 	if (spring_arm.spring_length-0.5 >= max_zoom and increment < 0) or (spring_arm.spring_length+0.5 <= min_zoom and increment > 0):
 		spring_arm.spring_length = move_toward(spring_arm.spring_length, spring_arm.spring_length+increment,0.5)
-	
 
 
 func rotate_camera(direction : String):
@@ -62,7 +62,11 @@ func process_input(event):
 		change_state(new_state)
 	##Cuando halla implementado el ataque como componente del jugador, va a ir acá.
 
+
 func process_frame(delta):
 	var new_state = current_state.process_frame(delta)
 	if new_state:
 		change_state(new_state)
+
+func die():
+	change_state(pDie)
