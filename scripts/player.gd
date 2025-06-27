@@ -1,29 +1,21 @@
-extends Node
+extends CharacterBody3D
+class_name Player
 
-@export var initial_state : pState
-@export var spring_arm : SpringArm3D
-@export var player : Player
-@export var pDie : pState
+@onready var animations : AnimatedSprite3D = $AnimatedSprite3D
+@onready var state_machine : Node = $pStateMachine
+@onready var spring_arm : SpringArm3D = $SpringArm3D
+@onready var healthComponent : HealthComponent = $HealthComponent
 
-var current_state : pState
-var is_camera_moving : bool = false
+@export var pDie : pState 
 
-func change_state(new_state : pState):
-	if current_state:
-		current_state._exit()
-	current_state = new_state
-	current_state._enter()
+func _ready():
+	state_machine.init(self)
 
-func init(parent : Player):
-	for child in get_children():
-		if child is not Label:
-			child.parent = parent
-	change_state(initial_state)
+func _unhandled_key_input(event):
+	state_machine.process_input(event)
 
-func process_physics(delta):
-	var new_state = current_state.process_physics(delta)
-	if new_state:
-		change_state(new_state)
+func _physics_process(delta):
+	state_machine.process_physics(delta)
 	if Input.is_action_just_pressed("camera_moveleft"):
 		rotate_camera("left")
 	if Input.is_action_just_pressed("camera_moveright"):
@@ -32,6 +24,16 @@ func process_physics(delta):
 		camera_zoom(false, delta)
 	if Input.is_action_just_pressed("camera_back"):
 		camera_zoom(true, delta)
+
+
+func _process(delta):
+	state_machine.process_frame(delta)
+
+func die():
+	state_machine.change_state(pDie)
+
+##movimientos de cámara
+var is_camera_moving : bool = false
 
 func camera_zoom(direction : bool, delta : float):
 	var increment = -5
@@ -42,7 +44,6 @@ func camera_zoom(direction : bool, delta : float):
 	
 	if (spring_arm.spring_length-0.5 >= max_zoom and increment < 0) or (spring_arm.spring_length+0.5 <= min_zoom and increment > 0):
 		spring_arm.spring_length = move_toward(spring_arm.spring_length, spring_arm.spring_length+increment,0.5)
-
 
 func rotate_camera(direction : String):
 	var degs : float = +45
@@ -55,18 +56,3 @@ func rotate_camera(direction : String):
 		camera_rotation_tween.tween_property(spring_arm, 'rotation_degrees', Vector3(spring_arm.rotation_degrees.x, spring_arm.rotation_degrees.y -degs, spring_arm.rotation_degrees.z),0.5)
 		await camera_rotation_tween.finished
 		is_camera_moving = false
-
-func process_input(event):
-	var new_state = current_state.process_input(event)
-	if new_state:
-		change_state(new_state)
-	##Cuando halla implementado el ataque como componente del jugador, va a ir acá.
-
-
-func process_frame(delta):
-	var new_state = current_state.process_frame(delta)
-	if new_state:
-		change_state(new_state)
-
-func die():
-	change_state(pDie)

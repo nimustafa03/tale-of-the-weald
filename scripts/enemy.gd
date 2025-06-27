@@ -1,9 +1,8 @@
-extends CharacterBody3D
-class_name Player
+extends Node
+class_name Enemy
 
 @onready var animations = $AnimatedSprite3D
-@onready var state_machine = $pStateMachine
-@onready var springArm3D = $SpringArm3D
+@onready var state_machine = $StateMachine
 @onready var healthComponent = $HealthComponent
 
 func _ready():

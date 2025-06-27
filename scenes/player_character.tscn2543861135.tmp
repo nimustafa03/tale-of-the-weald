@@ -2,10 +2,10 @@
 
 [ext_resource type="Script" uid="uid://dn2xyye3lsd5a" path="res://scripts/player.gd" id="1_56udc"]
 [ext_resource type="Texture2D" uid="uid://ct0g5ostm8uba" path="res://addons/placeholders/Idle (32x32).png" id="2_4h0vy"]
+[ext_resource type="Script" uid="uid://dvxjh6reapbvb" path="res://scripts/states/player/p_state_machine.gd" id="2_kww55"]
 [ext_resource type="Texture2D" uid="uid://dr3621cd7sa3x" path="res://addons/placeholders/Jump (32x32).png" id="3_2vmgx"]
 [ext_resource type="Texture2D" uid="uid://ddp2d1d7fmm45" path="res://addons/placeholders/Run (32x32).png" id="4_6unfe"]
 [ext_resource type="Script" uid="uid://cb5yms7ebdva3" path="res://scripts/states/player/p_die.gd" id="5_iadup"]
-[ext_resource type="Script" uid="uid://bqgxfle68x2yf" path="res://scripts/states/state_machine.gd" id="5_s7f3b"]
 [ext_resource type="Script" uid="uid://bjsrjc103j41m" path="res://scripts/states/player/p_idle.gd" id="6_6unfe"]
 [ext_resource type="Script" uid="uid://bsrmhtmduvfwt" path="res://scripts/states/player/p_run.gd" id="7_pxja8"]
 [ext_resource type="Script" uid="uid://bqwxl81bf401h" path="res://scripts/states/player/p_jump.gd" id="8_pxja8"]
@@ -207,10 +207,9 @@ animations = [{
 height = 1.42044
 radius = 0.463379
 
-[node name="playerCharacter" type="CharacterBody3D" node_paths=PackedStringArray("pDie")]
+[node name="playerCharacter" type="CharacterBody3D"]
 collision_layer = 2
 script = ExtResource("1_56udc")
-pDie = NodePath("pStateMachine/pDie")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0334647, 0)
@@ -223,7 +222,7 @@ billboard = 2
 shaded = true
 double_sided = false
 texture_filter = 2
-render_priority = 1
+render_priority = 10
 sprite_frames = SubResource("SpriteFrames_xc70a")
 animation = &"idle"
 
@@ -233,8 +232,10 @@ spring_length = 6.0
 
 [node name="Camera3D" type="Camera3D" parent="SpringArm3D"]
 
-[node name="pStateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
-script = ExtResource("5_s7f3b")
+[node name="pStateMachine" type="Node" parent="." node_paths=PackedStringArray("spring_arm", "pDie", "initial_state")]
+script = ExtResource("2_kww55")
+spring_arm = NodePath("../SpringArm3D")
+pDie = NodePath("pDie")
 initial_state = NodePath("pIdle")
 
 [node name="pIdle" type="Node" parent="pStateMachine" node_paths=PackedStringArray("fall_state", "run_state")]

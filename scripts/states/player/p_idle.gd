@@ -16,7 +16,7 @@ func process_physics(delta) -> pState:
 		return fall_state
 	return null
 
-func process_input(event) -> pState:
+func process_input(_event) -> pState:
 	if Input.is_action_just_pressed("jump") and parent.is_on_floor():
 		parent.velocity.y = jump_speed
 		return fall_state

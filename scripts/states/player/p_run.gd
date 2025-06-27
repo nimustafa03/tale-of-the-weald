@@ -28,10 +28,10 @@ func process_physics(delta) -> pState:
 		return idle_state
 	return null
 
-func process_frame(delta):
+func process_frame(_delta):
 	flipSprite()
 
-func process_input(event):
+func process_input(_event):
 	if Input.is_action_just_pressed("jump"):
 		parent.velocity.y = jump_speed
 		return fall_state

@@ -1,16 +1,20 @@
 [gd_scene load_steps=6 format=3 uid="uid://cmyh1p4gtykjt"]
 
 [ext_resource type="Script" uid="uid://de7p6bbrswxkf" path="res://scripts/components/hitbox_component.gd" id="1_xqmqg"]
-[ext_resource type="Script" uid="uid://bexrvmuho4t7r" path="res://fireattack.gd" id="2_xqmqg"]
+[ext_resource type="Script" uid="uid://bexrvmuho4t7r" path="res://scripts/fireattack.gd" id="2_xqmqg"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_xqmqg"]
 radius = 1.0
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_icfi2"]
+render_priority = 2
 transparency = 1
 albedo_color = Color(0.822945, 0.437143, 1.92523e-07, 1)
 emission_enabled = true
 emission = Color(0.8, 0.52549, 0, 1)
+distance_fade_mode = 1
+distance_fade_min_distance = 100.0
+distance_fade_max_distance = 20.0
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_eo6dx"]
 
