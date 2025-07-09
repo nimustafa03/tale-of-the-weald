@@ -14,12 +14,17 @@ config/name="jueguito hongos"
 run/main_scene="uid://dv1ux58568xdm"
 config/features=PackedStringArray("4.4", "Forward Plus")
 boot_splash/bg_color=Color(0.239336, 0.22549, 0.380788, 1)
+boot_splash/image="res://assets/bootsplash.png"
 config/icon="res://icon.svg"
 
 [display]
 
 window/size/viewport_width=1920
 window/size/viewport_height=1080
+
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/ply/plugin.cfg")
 
 [input]
 
@@ -79,3 +84,4 @@ camera_forward={
 3d_physics/layer_1="collisions"
 3d_physics/layer_2="player"
 3d_physics/layer_3="enemy"
+3d_physics/layer_4="cameracollision"

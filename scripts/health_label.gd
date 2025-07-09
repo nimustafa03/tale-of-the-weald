@@ -4,4 +4,4 @@ extends Label
 @onready var healthComponent : HealthComponent 
 
 func _process(delta):
-	text = "%s/" %parent.healthComponent.max_health + "%s" %parent.healthComponent.health
+	text = "%s" %parent.healthComponent.health + "%s/" %parent.healthComponent.max_health 
