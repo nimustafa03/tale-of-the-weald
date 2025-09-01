@@ -1,12 +1,13 @@
-[gd_scene load_steps=30 format=4 uid="uid://c5xblrrwat1e4"]
+[gd_scene load_steps=31 format=4 uid="uid://c5xblrrwat1e4"]
 
 [ext_resource type="PackedScene" uid="uid://cfmgsgc4u1jw2" path="res://scenes/player_character.tscn" id="1_j8ivh"]
 [ext_resource type="PackedScene" uid="uid://cmyh1p4gtykjt" path="res://scenes/fire.tscn" id="1_rnaij"]
-[ext_resource type="Script" uid="uid://nkrwr7uqj21t" path="res://scripts/label.gd" id="2_7ddre"]
+[ext_resource type="Script" uid="uid://nkrwr7uqj21t" path="res://scripts/state_label.gd" id="2_7ddre"]
 [ext_resource type="Texture2D" uid="uid://daexxcuj361l8" path="res://addons/kenney_prototype_textures/orange/texture_01.png" id="2_nd71p"]
 [ext_resource type="Script" uid="uid://dghq27ecpj7qa" path="res://scripts/springlengthlabel.gd" id="2_qjeyg"]
 [ext_resource type="Script" uid="uid://d2jtsclf26s41" path="res://scripts/health_label.gd" id="3_wtsjf"]
 [ext_resource type="Texture2D" uid="uid://dwu2g0d5fuj6b" path="res://addons/kenney_prototype_textures/orange/texture_09.png" id="4_3qnke"]
+[ext_resource type="Script" uid="uid://ci4ruud3i4r52" path="res://scripts/collectables_label.gd" id="6_gah1j"]
 [ext_resource type="Material" uid="uid://b4i0cps0lllg8" path="res://addons/ply/materials/debug_material_light.tres" id="8_qq5q4"]
 [ext_resource type="Script" uid="uid://b5c7xx2kg7a2" path="res://addons/ply/nodes/ply.gd" id="9_gah1j"]
 [ext_resource type="Script" uid="uid://btl37w82etaae" path="res://addons/ply/resources/ply_mesh.gd" id="10_ap2hy"]
@@ -133,6 +134,13 @@ offset_left = -1.0
 offset_right = 209.0
 offset_bottom = 45.0
 script = ExtResource("2_7ddre")
+parent = NodePath("..")
+
+[node name="collectablesLabel" type="Label" parent="playerCharacter" node_paths=PackedStringArray("parent")]
+offset_top = 168.0
+offset_right = 1.0
+offset_bottom = 191.0
+script = ExtResource("6_gah1j")
 parent = NodePath("..")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]

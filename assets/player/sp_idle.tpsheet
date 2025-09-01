@@ -1,0 +1,168 @@
+{
+	"textures": [
+		{
+			"image": "sp_idle.png",
+			"size": {
+				"w": 2015,
+				"h": 896
+			},
+			"sprites": [
+				{
+					"filename": "sp_idle_0001.png",
+					"region": {
+						"x": 0,
+						"y": 0,
+						"w": 676,
+						"h": 449
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "sp_idle_0002.png",
+					"region": {
+						"x": 676,
+						"y": 0,
+						"w": 675,
+						"h": 448
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "sp_idle_0000.png",
+					"region": {
+						"x": 1351,
+						"y": 0,
+						"w": 664,
+						"h": 458
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "sp_idle_0006.png",
+					"region": {
+						"x": 676,
+						"y": 448,
+						"w": 648,
+						"h": 447
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "sp_idle_0007.png",
+					"region": {
+						"x": 0,
+						"y": 449,
+						"w": 641,
+						"h": 447
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "sp_idle_0005.png",
+					"region": {
+						"x": 1351,
+						"y": 0,
+						"w": 664,
+						"h": 458
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "sp_idle_0004.png",
+					"region": {
+						"x": 0,
+						"y": 0,
+						"w": 676,
+						"h": 449
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "sp_idle_0003.png",
+					"region": {
+						"x": 676,
+						"y": 0,
+						"w": 675,
+						"h": 448
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "sp_idle_0009.png",
+					"region": {
+						"x": 676,
+						"y": 448,
+						"w": 648,
+						"h": 447
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "sp_idle_0008.png",
+					"region": {
+						"x": 0,
+						"y": 449,
+						"w": 641,
+						"h": 447
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				}
+			]
+		}
+	],
+	"meta": {
+		"app": "http://free-tex-packer.com",
+		"version": "0.6.7",
+		"format": "RGBA8888",
+	}
+}

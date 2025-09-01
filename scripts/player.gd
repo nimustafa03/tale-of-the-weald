@@ -5,6 +5,7 @@ class_name Player
 @onready var state_machine : Node = $pStateMachine
 @onready var spring_arm : SpringArm3D = $SpringArm3D
 @onready var healthComponent : HealthComponent = $HealthComponent
+@onready var collectableComponent : CollectableComponent = $CollectableComponent
 
 @export var pDie : pState 
 
@@ -13,6 +14,8 @@ func _ready():
 
 func _unhandled_key_input(event):
 	state_machine.process_input(event)
+	if Input.is_action_just_pressed("add_primitive"):
+		collectableComponent.addCollectableAmount("Primitive",1)
 
 func _physics_process(delta):
 	state_machine.process_physics(delta)

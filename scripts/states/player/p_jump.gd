@@ -16,6 +16,7 @@ func process_physics(delta):
 	if !Input.is_action_pressed("jump"):
 		parent.velocity.y -= gravity * delta
 	if parent.velocity.y <= 0:
+		parent.animations.play("fall")
 		parent.velocity.y -= gravity *2 * delta
 	
 	InputMove(delta, spring_arm)

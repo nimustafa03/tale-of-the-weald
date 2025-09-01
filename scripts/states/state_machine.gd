@@ -25,7 +25,6 @@ func process_input(event):
 	var new_state = current_state.process_input(event)
 	if new_state:
 		change_state(new_state)
-	##Cuando halla implementado el ataque como componente del jugador, va a ir acá.
 
 
 func process_frame(delta):

@@ -18,4 +18,4 @@ func _process(delta):
 	state_machine.process_frame(delta)
 
 func die():
-	state_machine.die()
+	state_machine.change_state($StateMachine/eDie)
