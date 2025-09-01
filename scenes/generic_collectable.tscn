@@ -1,0 +1,39 @@
+[gd_scene load_steps=5 format=3 uid="uid://c5f0smfw3qq6w"]
+
+[ext_resource type="Script" uid="uid://c4xwoy6m68x3f" path="res://scripts/genericCollectable.gd" id="1_xjwhw"]
+[ext_resource type="Texture2D" uid="uid://cuhu4tldiv4pp" path="res://assets/collectables/primitive.png" id="3_3ne84"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_xjwhw"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_3ne84")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_3ne84"]
+radius = 0.792116
+
+[node name="GenericCollectable" type="StaticBody3D"]
+
+[node name="GenericCollectable" type="Node" parent="." node_paths=PackedStringArray("parent")]
+script = ExtResource("1_xjwhw")
+parent = NodePath("..")
+metadata/_custom_type_script = "uid://c4xwoy6m68x3f"
+
+[node name="AnimatedSprite3D" type="AnimatedSprite3D" parent="."]
+transform = Transform3D(0.848102, 0, 0, 0, 0.848102, 0, 0, 0, 0.848102, 0, 0.623577, 0)
+visibility_range_end = 200.0
+billboard = 2
+sprite_frames = SubResource("SpriteFrames_xjwhw")
+
+[node name="CollectionComponent" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CollectionComponent"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.623228, 0)
+shape = SubResource("SphereShape3D_3ne84")
+
+[connection signal="area_entered" from="CollectionComponent" to="GenericCollectable" method="_on_collection_component_area_entered"]

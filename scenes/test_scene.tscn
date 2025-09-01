@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=4 uid="uid://c5xblrrwat1e4"]
+[gd_scene load_steps=32 format=4 uid="uid://c5xblrrwat1e4"]
 
 [ext_resource type="PackedScene" uid="uid://cfmgsgc4u1jw2" path="res://scenes/player_character.tscn" id="1_j8ivh"]
 [ext_resource type="PackedScene" uid="uid://cmyh1p4gtykjt" path="res://scenes/fire.tscn" id="1_rnaij"]
@@ -19,11 +19,12 @@
 [ext_resource type="Material" uid="uid://f6xd80u8vkfw" path="res://addons/ply/materials/debug_material_green.tres" id="16_afgys"]
 [ext_resource type="Material" uid="uid://l5ph4ka5c0uq" path="res://addons/ply/materials/debug_material_blue.tres" id="17_sstcd"]
 [ext_resource type="Material" uid="uid://m4fm1mohv8oo" path="res://addons/ply/materials/debug_material_purple.tres" id="18_2oq4n"]
+[ext_resource type="PackedScene" uid="uid://c5f0smfw3qq6w" path="res://scenes/generic_collectable.tscn" id="20_ap2hy"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wtsjf"]
 albedo_texture = ExtResource("4_3qnke")
 uv1_scale = Vector3(10, 10, 10)
-distance_fade_mode = 1
+distance_fade_mode = 2
 distance_fade_min_distance = 100.0
 distance_fade_max_distance = 20.0
 
@@ -97,7 +98,7 @@ data = PackedVector3Array(-0.9166, 2.8082, 1.9318, -2.3295, 1.0201, 2.5847, -2.3
 [node name="main" type="Node3D"]
 
 [node name="Fire" parent="." instance=ExtResource("1_rnaij")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.064, 1.13406, 0.454035)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 50.0547, 1.13406, -29.3016)
 
 [node name="playerCharacter" parent="." instance=ExtResource("1_j8ivh")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
@@ -227,3 +228,14 @@ metadata/_custom_type_script = "uid://b5c7xx2kg7a2"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="enemyarea/MeshInstance3D/StaticBody3D"]
 shape = SubResource("ConcavePolygonShape3D_gah1j")
+
+[node name="collectablesTest" type="Node3D" parent="."]
+
+[node name="GenericCollectable" parent="collectablesTest" instance=ExtResource("20_ap2hy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15, 0, 0)
+
+[node name="GenericCollectable2" parent="collectablesTest" instance=ExtResource("20_ap2hy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16.2776, 0, 2.77398)
+
+[node name="GenericCollectable3" parent="collectablesTest" instance=ExtResource("20_ap2hy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.9381, 0, 3.50817)

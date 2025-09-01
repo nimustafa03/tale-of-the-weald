@@ -167,9 +167,10 @@ metadata/_custom_type_script = "uid://bbk7hmc17x0uu"
 script = ExtResource("5_iadup")
 metadata/_custom_type_script = "uid://bbk7hmc17x0uu"
 
-[node name="HitboxComponent" type="Area3D" parent="." node_paths=PackedStringArray("health_component")]
+[node name="HitboxComponent" type="Area3D" parent="." node_paths=PackedStringArray("health_component", "collectable_component")]
 script = ExtResource("10_s7f3b")
 health_component = NodePath("../HealthComponent")
+collectable_component = NodePath("../CollectableComponent")
 metadata/_custom_type_script = "uid://de7p6bbrswxkf"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="HitboxComponent"]
