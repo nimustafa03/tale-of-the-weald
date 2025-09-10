@@ -21,11 +21,13 @@ func process_physics(delta) -> pState:
 	
 	if !Input.is_anything_pressed():
 		parent.velocity = Vector3(move_toward(parent.velocity.x,0,slide),parent.velocity.y,move_toward(parent.velocity.z,0,slide))
-	
-	
 	parent.move_and_slide()
 	if parent.velocity == Vector3(0,0,0) and !Input.is_anything_pressed():
 		return idle_state
+	if (parent.velocity.x < 1 && parent.velocity.x > -1) && (parent.velocity.z < 1 && parent.velocity.z > -1):
+		parent.animations.play("idle")
+	else:
+		parent.animations.play("run")
 	return null
 
 func process_frame(_delta):

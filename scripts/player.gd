@@ -14,8 +14,6 @@ func _ready():
 
 func _unhandled_key_input(event):
 	state_machine.process_input(event)
-	if Input.is_action_just_pressed("add_primitive"):
-		collectableComponent.addCollectableAmount("Primitive",1)
 
 func _physics_process(delta):
 	state_machine.process_physics(delta)

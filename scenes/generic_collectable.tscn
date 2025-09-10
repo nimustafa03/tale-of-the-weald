@@ -19,9 +19,10 @@ radius = 0.792116
 
 [node name="GenericCollectable" type="StaticBody3D"]
 
-[node name="GenericCollectable" type="Node" parent="." node_paths=PackedStringArray("parent")]
+[node name="GenericCollectable" type="Node" parent="." node_paths=PackedStringArray("parent", "animations")]
 script = ExtResource("1_xjwhw")
 parent = NodePath("..")
+animations = NodePath("../AnimatedSprite3D")
 metadata/_custom_type_script = "uid://c4xwoy6m68x3f"
 
 [node name="AnimatedSprite3D" type="AnimatedSprite3D" parent="."]

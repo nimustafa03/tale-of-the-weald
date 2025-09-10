@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=4 uid="uid://c5xblrrwat1e4"]
+[gd_scene load_steps=33 format=4 uid="uid://c5xblrrwat1e4"]
 
 [ext_resource type="PackedScene" uid="uid://cfmgsgc4u1jw2" path="res://scenes/player_character.tscn" id="1_j8ivh"]
 [ext_resource type="PackedScene" uid="uid://cmyh1p4gtykjt" path="res://scenes/fire.tscn" id="1_rnaij"]
@@ -20,6 +20,7 @@
 [ext_resource type="Material" uid="uid://l5ph4ka5c0uq" path="res://addons/ply/materials/debug_material_blue.tres" id="17_sstcd"]
 [ext_resource type="Material" uid="uid://m4fm1mohv8oo" path="res://addons/ply/materials/debug_material_purple.tres" id="18_2oq4n"]
 [ext_resource type="PackedScene" uid="uid://c5f0smfw3qq6w" path="res://scenes/generic_collectable.tscn" id="20_ap2hy"]
+[ext_resource type="PackedScene" uid="uid://dyav16wpg4tg7" path="res://scenes/spore_collectable.tscn" id="20_nlwlv"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wtsjf"]
 albedo_texture = ExtResource("4_3qnke")
@@ -230,6 +231,15 @@ metadata/_custom_type_script = "uid://b5c7xx2kg7a2"
 shape = SubResource("ConcavePolygonShape3D_gah1j")
 
 [node name="collectablesTest" type="Node3D" parent="."]
+
+[node name="SporeCollectable3" parent="collectablesTest" instance=ExtResource("20_nlwlv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14, 0, -5)
+
+[node name="SporeCollectable2" parent="collectablesTest" instance=ExtResource("20_nlwlv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -20, 0, -4)
+
+[node name="SporeCollectable" parent="collectablesTest" instance=ExtResource("20_nlwlv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -19, 0, -7)
 
 [node name="GenericCollectable" parent="collectablesTest" instance=ExtResource("20_ap2hy")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15, 0, 0)

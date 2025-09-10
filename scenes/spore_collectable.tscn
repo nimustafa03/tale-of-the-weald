@@ -1,0 +1,53 @@
+[gd_scene load_steps=8 format=3 uid="uid://dyav16wpg4tg7"]
+
+[ext_resource type="Texture2D" uid="uid://bbcphvxh5m3px" path="res://assets/collectables/spore/spore_0000.png" id="1_m6cdy"]
+[ext_resource type="Texture2D" uid="uid://g5ehr443hgm6" path="res://assets/collectables/spore/spore_0001.png" id="2_e4lm4"]
+[ext_resource type="Texture2D" uid="uid://cj2k88ou436l8" path="res://assets/collectables/spore/spore_0002.png" id="3_mikkk"]
+[ext_resource type="Texture2D" uid="uid://hj08pwmcmsu8" path="res://assets/collectables/spore/spore_0003.png" id="4_3clq1"]
+[ext_resource type="Script" uid="uid://c3eddbcomtd0b" path="res://scenes/spore_collectable.gd" id="5_e4lm4"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ixsid"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_m6cdy")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_e4lm4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_mikkk")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_3clq1")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_m6cdy"]
+radius = 0.792116
+
+[node name="SporeCollectable" type="StaticBody3D"]
+
+[node name="AnimatedSprite3D" type="AnimatedSprite3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.606465, 0)
+billboard = 2
+sprite_frames = SubResource("SpriteFrames_ixsid")
+frame_progress = 0.333654
+
+[node name="CollectionComponent" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CollectionComponent"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.623228, 0)
+shape = SubResource("SphereShape3D_m6cdy")
+
+[node name="SporeCollectable" type="Node" parent="." node_paths=PackedStringArray("parent", "animations")]
+script = ExtResource("5_e4lm4")
+parent = NodePath("..")
+collectableName = "Spore"
+animations = NodePath("../AnimatedSprite3D")
+metadata/_custom_type_script = "uid://c4xwoy6m68x3f"
+
+[connection signal="area_entered" from="CollectionComponent" to="SporeCollectable" method="_on_collection_component_area_entered"]

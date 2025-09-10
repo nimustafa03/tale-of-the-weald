@@ -121,6 +121,7 @@ shape = SubResource("CapsuleShape3D_uj7mf")
 
 [node name="AnimatedSprite3D" type="AnimatedSprite3D" parent="."]
 transform = Transform3D(-0.393728, 0, 0, 0, -0.393728, 0, 0, 0, 5, 0, 0.426572, 0)
+layers = 2
 gi_mode = 2
 billboard = 2
 alpha_cut = 2
@@ -167,10 +168,11 @@ metadata/_custom_type_script = "uid://bbk7hmc17x0uu"
 script = ExtResource("5_iadup")
 metadata/_custom_type_script = "uid://bbk7hmc17x0uu"
 
-[node name="HitboxComponent" type="Area3D" parent="." node_paths=PackedStringArray("health_component", "collectable_component")]
+[node name="HitboxComponent" type="Area3D" parent="." node_paths=PackedStringArray("health_component", "collectable_component", "parent")]
 script = ExtResource("10_s7f3b")
 health_component = NodePath("../HealthComponent")
 collectable_component = NodePath("../CollectableComponent")
+parent = NodePath("..")
 metadata/_custom_type_script = "uid://de7p6bbrswxkf"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="HitboxComponent"]
