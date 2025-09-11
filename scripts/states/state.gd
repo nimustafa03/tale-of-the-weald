@@ -7,11 +7,11 @@ func _enter():
 func _exit():
 	pass
 
-func process_frame(delta) -> pState:
+func process_frame(_delta) -> pState:
 	return null
 
-func process_physics(delta) -> pState:
+func process_physics(_delta) -> pState:
 	return null
 
-func process_input(event) -> pState:
+func process_input(_event) -> pState:
 	return null

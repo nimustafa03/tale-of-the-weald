@@ -1,19 +1,19 @@
 extends eState
 
-var parent : Player
-
-##Diccionario de estados
+##State Dictionary
 @export var pursue_state : State
-@export var attack_state : State
-
-var gravity :float = 50
 
 func _enter():
 	super()
-	parent.velocity.x = 0
-	parent.velocity.y = 0
+	parent.velocity = Vector3.ZERO
 
 func process_physics(delta) -> pState:
 	parent.velocity.y -= gravity*delta
 	parent.move_and_slide()
 	return null
+
+
+func _on_scan_sphere_area_entered(area):
+	if area is HitboxComponent:
+		parent.state_machine.change_state(pursue_state)
+	return self

@@ -21,7 +21,7 @@ func process_physics(delta):
 	if new_state:
 		change_state(new_state)
 
-func process_input(event):
+func process_input(event):  ##This is only used for player States. Maybe it'd be convenient to make a generic state_machine class that doesn't include it? And make children classes that include these functions.
 	var new_state = current_state.process_input(event)
 	if new_state:
 		change_state(new_state)

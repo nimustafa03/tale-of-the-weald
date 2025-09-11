@@ -30,5 +30,5 @@ func process_physics(delta):
 			return idle_state
 	return null
 
-func process_frame(delta):
+func process_frame(_delta):
 	flipSprite()

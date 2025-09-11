@@ -22,9 +22,9 @@ func _physics_process(delta):
 	if Input.is_action_just_pressed("camera_moveright"):
 		rotate_camera("right")
 	if Input.is_action_just_pressed("camera_forward"):
-		camera_zoom(false, delta)
+		camera_zoom(false)
 	if Input.is_action_just_pressed("camera_back"):
-		camera_zoom(true, delta)
+		camera_zoom(true)
 
 
 func _process(delta):
@@ -36,7 +36,7 @@ func die():
 ##movimientos de cámara
 var is_camera_moving : bool = false
 
-func camera_zoom(direction : bool, delta : float):
+func camera_zoom(direction : bool):
 	var increment = -5
 	if direction == true:
 		increment = -increment

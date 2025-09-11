@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://g5ehr443hgm6" path="res://assets/collectables/spore/spore_0001.png" id="2_e4lm4"]
 [ext_resource type="Texture2D" uid="uid://cj2k88ou436l8" path="res://assets/collectables/spore/spore_0002.png" id="3_mikkk"]
 [ext_resource type="Texture2D" uid="uid://hj08pwmcmsu8" path="res://assets/collectables/spore/spore_0003.png" id="4_3clq1"]
-[ext_resource type="Script" uid="uid://c3eddbcomtd0b" path="res://scenes/spore_collectable.gd" id="5_e4lm4"]
+[ext_resource type="Script" uid="uid://c3eddbcomtd0b" path="res://spore_collectable.gd" id="5_e4lm4"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_ixsid"]
 animations = [{
@@ -38,6 +38,8 @@ sprite_frames = SubResource("SpriteFrames_ixsid")
 frame_progress = 0.333654
 
 [node name="CollectionComponent" type="Area3D" parent="."]
+collision_layer = 16
+collision_mask = 2
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="CollectionComponent"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.623228, 0)

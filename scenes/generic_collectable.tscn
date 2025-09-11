@@ -18,6 +18,8 @@ animations = [{
 radius = 0.792116
 
 [node name="GenericCollectable" type="StaticBody3D"]
+collision_layer = 16
+collision_mask = 2
 
 [node name="GenericCollectable" type="Node" parent="." node_paths=PackedStringArray("parent", "animations")]
 script = ExtResource("1_xjwhw")
@@ -32,6 +34,8 @@ billboard = 2
 sprite_frames = SubResource("SpriteFrames_xjwhw")
 
 [node name="CollectionComponent" type="Area3D" parent="."]
+collision_layer = 16
+collision_mask = 2
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="CollectionComponent"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.623228, 0)

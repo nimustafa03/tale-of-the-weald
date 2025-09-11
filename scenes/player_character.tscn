@@ -112,6 +112,7 @@ radius = 0.463379
 
 [node name="playerCharacter" type="CharacterBody3D" node_paths=PackedStringArray("pDie")]
 collision_layer = 2
+collision_mask = 17
 script = ExtResource("1_56udc")
 pDie = NodePath("pStateMachine/pDie")
 
@@ -169,6 +170,8 @@ script = ExtResource("5_iadup")
 metadata/_custom_type_script = "uid://bbk7hmc17x0uu"
 
 [node name="HitboxComponent" type="Area3D" parent="." node_paths=PackedStringArray("health_component", "collectable_component", "parent")]
+collision_layer = 2
+collision_mask = 20
 script = ExtResource("10_s7f3b")
 health_component = NodePath("../HealthComponent")
 collectable_component = NodePath("../CollectableComponent")

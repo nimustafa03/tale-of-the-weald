@@ -1,62 +1,104 @@
-[gd_scene load_steps=11 format=3 uid="uid://dfh5r553kua0a"]
+[gd_scene load_steps=14 format=3 uid="uid://dfh5r553kua0a"]
 
-[ext_resource type="Script" uid="uid://d378vuqbtmu2a" path="res://scripts/enemy.gd" id="1_8c00y"]
-[ext_resource type="Script" uid="uid://cbytxgc3ophoe" path="res://scripts/components/health_component.gd" id="1_h17bh"]
-[ext_resource type="Script" uid="uid://hqnoqlqypuo4" path="res://scripts/states/enemy/e_idle.gd" id="1_lkcdx"]
-[ext_resource type="Script" uid="uid://de7p6bbrswxkf" path="res://scripts/components/hitbox_component.gd" id="2_fpxyv"]
-[ext_resource type="Script" uid="uid://bqgxfle68x2yf" path="res://scripts/states/state_machine.gd" id="2_jqw88"]
-[ext_resource type="Script" uid="uid://dwjt6qd64607k" path="res://scripts/attack.gd" id="3_lkcdx"]
+[ext_resource type="Script" uid="uid://de7p6bbrswxkf" path="res://scripts/components/hitbox_component.gd" id="1_h17bh"]
+[ext_resource type="Script" uid="uid://d378vuqbtmu2a" path="res://scripts/enemy.gd" id="1_mkyue"]
+[ext_resource type="Script" uid="uid://bqgxfle68x2yf" path="res://scripts/states/state_machine.gd" id="3_fpxyv"]
+[ext_resource type="Script" uid="uid://hqnoqlqypuo4" path="res://scripts/states/enemy/e_idle.gd" id="4_lkcdx"]
+[ext_resource type="Script" uid="uid://grb5ndohtlbi" path="res://scripts/states/enemy/eState.gd" id="5_8c00y"]
+[ext_resource type="Script" uid="uid://dklqxgkl6scss" path="res://scripts/states/enemy/pursuit.gd" id="5_t46gg"]
+[ext_resource type="Script" uid="uid://cbytxgc3ophoe" path="res://scripts/components/health_component.gd" id="6_1y3pe"]
+[ext_resource type="Script" uid="uid://dwjt6qd64607k" path="res://scripts/attack.gd" id="7_t46gg"]
 
-[sub_resource type="CylinderShape3D" id="CylinderShape3D_fpxyv"]
-radius = 3.0
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_h17bh"]
+radius = 0.710148
+height = 1.45704
 
-[sub_resource type="CapsuleMesh" id="CapsuleMesh_8c00y"]
+[sub_resource type="PrismMesh" id="PrismMesh_7ibm0"]
 
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_lkcdx"]
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_mkyue"]
+height = 1.05774
+radius = 0.541016
 
-[sub_resource type="SphereShape3D" id="SphereShape3D_jqw88"]
+[sub_resource type="SphereShape3D" id="SphereShape3D_1y3pe"]
 radius = 10.0
 
-[node name="TestEnemy" type="CharacterBody3D"]
-script = ExtResource("1_8c00y")
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_1y3pe"]
+height = 0.98877
+radius = 1.14209
 
-[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
-script = ExtResource("2_jqw88")
-initial_state = NodePath("eIdle")
+[node name="TestEnemy" type="CharacterBody3D" node_paths=PackedStringArray("deathstate")]
+collision_layer = 4
+script = ExtResource("1_mkyue")
+deathstate = NodePath("StateMachine/Die")
 
-[node name="eIdle" type="Node" parent="StateMachine"]
-script = ExtResource("1_lkcdx")
+[node name="CollisionSphere" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.16983, -0.132381)
+shape = SubResource("CapsuleShape3D_h17bh")
 
-[node name="ePursue" type="Node" parent="StateMachine"]
-
-[node name="eAttack" type="Node" parent="StateMachine"]
-
-[node name="eDie" type="Node" parent="StateMachine"]
+[node name="PlaceholderMesh" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
+mesh = SubResource("PrismMesh_7ibm0")
 
 [node name="HitboxComponent" type="Area3D" parent="."]
-script = ExtResource("2_fpxyv")
+collision_layer = 4
+collision_mask = 0
+script = ExtResource("1_h17bh")
 metadata/_custom_type_script = "uid://de7p6bbrswxkf"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="HitboxComponent"]
-shape = SubResource("CylinderShape3D_fpxyv")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.00567627, 0)
+shape = SubResource("CylinderShape3D_mkyue")
 
-[node name="HealthComponent" type="Node" parent="."]
-script = ExtResource("1_h17bh")
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
+
+[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
+script = ExtResource("3_fpxyv")
+initial_state = NodePath("Idle")
+metadata/_custom_type_script = "uid://bqgxfle68x2yf"
+
+[node name="Idle" type="Node" parent="StateMachine" node_paths=PackedStringArray("pursue_state")]
+script = ExtResource("4_lkcdx")
+pursue_state = NodePath("../Pursuit")
+metadata/_custom_type_script = "uid://grb5ndohtlbi"
+
+[node name="Pursuit" type="Node" parent="StateMachine" node_paths=PackedStringArray("idle_state", "attack_state")]
+script = ExtResource("5_t46gg")
+idle_state = NodePath("../Idle")
+attack_state = NodePath("../Attack")
+metadata/_custom_type_script = "uid://grb5ndohtlbi"
+
+[node name="Attack" type="Node" parent="StateMachine"]
+script = ExtResource("5_8c00y")
+metadata/_custom_type_script = "uid://grb5ndohtlbi"
+
+[node name="Die" type="Node" parent="StateMachine"]
+script = ExtResource("5_8c00y")
+metadata/_custom_type_script = "uid://grb5ndohtlbi"
+
+[node name="HealthComponent" type="Node" parent="." node_paths=PackedStringArray("parent")]
+script = ExtResource("6_1y3pe")
+parent = NodePath("..")
+max_health = 5.0
 metadata/_custom_type_script = "uid://cbytxgc3ophoe"
 
-[node name="Attack" type="Node" parent="."]
-script = ExtResource("3_lkcdx")
+[node name="AttackComponent" type="Node" parent="."]
+script = ExtResource("7_t46gg")
 metadata/_custom_type_script = "uid://dwjt6qd64607k"
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-mesh = SubResource("CapsuleMesh_8c00y")
+[node name="ScanSphere" type="Area3D" parent="."]
+collision_layer = 4
+collision_mask = 2
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-shape = SubResource("CapsuleShape3D_lkcdx")
+[node name="ScanSphere" type="CollisionShape3D" parent="ScanSphere"]
+shape = SubResource("SphereShape3D_1y3pe")
 
-[node name="scanradius" type="Area3D" parent="."]
-visible = false
+[node name="AttackRange" type="Area3D" parent="."]
+collision_layer = 4
+collision_mask = 2
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="scanradius"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0251465, 0)
-shape = SubResource("SphereShape3D_jqw88")
+[node name="AttackRange" type="CollisionShape3D" parent="AttackRange"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0192871, 0)
+shape = SubResource("CylinderShape3D_1y3pe")
+
+[connection signal="area_entered" from="ScanSphere" to="StateMachine/Idle" method="_on_scan_sphere_area_entered"]
+[connection signal="area_exited" from="ScanSphere" to="StateMachine/Pursuit" method="_on_scan_sphere_area_exited"]
