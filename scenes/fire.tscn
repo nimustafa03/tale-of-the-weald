@@ -9,9 +9,9 @@ radius = 1.0
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_icfi2"]
 render_priority = 2
 transparency = 1
-albedo_color = Color(0.822945, 0.437143, 1.92523e-07, 1)
+albedo_color = Color(0.172549, 0.745098, 0, 1)
 emission_enabled = true
-emission = Color(0.8, 0.52549, 0, 1)
+emission = Color(0.290196, 0.847059, 0.4, 1)
 distance_fade_mode = 1
 distance_fade_min_distance = 100.0
 distance_fade_max_distance = 20.0
@@ -20,16 +20,17 @@ distance_fade_max_distance = 20.0
 
 [node name="Fire" type="StaticBody3D"]
 
-[node name="HitboxComponent" type="Area3D" parent="."]
+[node name="HitboxComponent" type="Area3D" parent="." node_paths=PackedStringArray("parent")]
 collision_layer = 0
 collision_mask = 3
 script = ExtResource("1_xqmqg")
+parent = NodePath("..")
 metadata/_custom_type_script = "uid://de7p6bbrswxkf"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="HitboxComponent"]
 shape = SubResource("SphereShape3D_xqmqg")
 
-[node name="AttackComponent" type="Node" parent="."]
+[node name="FireAttack" type="Node" parent="."]
 script = ExtResource("2_xqmqg")
 metadata/_custom_type_script = "uid://dwjt6qd64607k"
 
@@ -38,4 +39,4 @@ material_override = SubResource("StandardMaterial3D_icfi2")
 transparency = 0.5
 mesh = SubResource("CapsuleMesh_eo6dx")
 
-[connection signal="area_entered" from="HitboxComponent" to="AttackComponent" method="_on_hitbox_component_area_entered"]
+[connection signal="area_entered" from="HitboxComponent" to="FireAttack" method="_on_hitbox_component_area_entered"]

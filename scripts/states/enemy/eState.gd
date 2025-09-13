@@ -8,7 +8,7 @@ class_name eState
 @export var slide : float
 
 var player = null
-var parent : Enemy
+var parent : CharacterBody3D
 
 func _enter():
 	if (animation_name):

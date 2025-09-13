@@ -1,0 +1,34 @@
+[gd_scene load_steps=5 format=3 uid="uid://cdojmmjj5gatk"]
+
+[ext_resource type="Script" uid="uid://cy3sdj4en2yxp" path="res://scenes/attackball.gd" id="1_ws6l6"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_v27ce"]
+radius = 1.0
+
+[sub_resource type="SphereMesh" id="SphereMesh_5riii"]
+radius = 1.0
+height = 2.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_602tm"]
+albedo_color = Color(1, 0.109804, 0.137255, 1)
+
+[node name="AttackBall" type="StaticBody3D"]
+
+[node name="Area3D" type="Area3D" parent="."]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+shape = SubResource("SphereShape3D_v27ce")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+layers = 17
+transparency = 0.5
+mesh = SubResource("SphereMesh_5riii")
+surface_material_override/0 = SubResource("StandardMaterial3D_602tm")
+
+[node name="Attack" type="Node" parent="."]
+script = ExtResource("1_ws6l6")
+metadata/_custom_type_script = "uid://dwjt6qd64607k"
+
+[connection signal="area_entered" from="Area3D" to="Attack" method="_on_area_3d_area_entered"]

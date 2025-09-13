@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://dfh5r553kua0a"]
+[gd_scene load_steps=15 format=3 uid="uid://dfh5r553kua0a"]
 
 [ext_resource type="Script" uid="uid://de7p6bbrswxkf" path="res://scripts/components/hitbox_component.gd" id="1_h17bh"]
 [ext_resource type="Script" uid="uid://d378vuqbtmu2a" path="res://scripts/enemy.gd" id="1_mkyue"]
@@ -8,6 +8,7 @@
 [ext_resource type="Script" uid="uid://dklqxgkl6scss" path="res://scripts/states/enemy/e_pursuit.gd" id="5_t46gg"]
 [ext_resource type="Script" uid="uid://cbytxgc3ophoe" path="res://scripts/components/health_component.gd" id="6_1y3pe"]
 [ext_resource type="Script" uid="uid://bw57iumvcftvi" path="res://scripts/states/enemy/e_attack.gd" id="6_dddk1"]
+[ext_resource type="Script" uid="uid://dwjt6qd64607k" path="res://scripts/attack.gd" id="7_t46gg"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_h17bh"]
 radius = 0.710148
@@ -24,11 +25,10 @@ radius = 10.0
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_1y3pe"]
 height = 0.98877
-radius = 0.518066
+radius = 0.715332
 
 [node name="TestEnemy" type="CharacterBody3D" node_paths=PackedStringArray("deathstate")]
 collision_layer = 4
-collision_priority = 2.0
 script = ExtResource("1_mkyue")
 deathstate = NodePath("StateMachine/Die")
 
@@ -49,6 +49,8 @@ metadata/_custom_type_script = "uid://de7p6bbrswxkf"
 [node name="CollisionShape3D" type="CollisionShape3D" parent="HitboxComponent"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.00567627, 0)
 shape = SubResource("CylinderShape3D_mkyue")
+
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
 
 [node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
 script = ExtResource("3_fpxyv")
@@ -81,6 +83,10 @@ parent = NodePath("..")
 max_health = 5.0
 metadata/_custom_type_script = "uid://cbytxgc3ophoe"
 
+[node name="AttackComponent" type="Node" parent="."]
+script = ExtResource("7_t46gg")
+metadata/_custom_type_script = "uid://dwjt6qd64607k"
+
 [node name="ScanSphere" type="Area3D" parent="."]
 collision_layer = 4
 collision_mask = 2
@@ -89,18 +95,26 @@ collision_mask = 2
 shape = SubResource("SphereShape3D_1y3pe")
 
 [node name="AttackRange" type="Area3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.00845)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.735197)
 collision_layer = 4
 collision_mask = 2
 
 [node name="AttackRange" type="CollisionShape3D" parent="AttackRange"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0192871, 0)
 shape = SubResource("CylinderShape3D_1y3pe")
 
-[node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
+[node name="AttackTimer" type="Timer" parent="."]
+one_shot = true
 
 [node name="CooldownTimer" type="Timer" parent="."]
 one_shot = true
 
+[node name="Attack" type="Node" parent="."]
+script = ExtResource("7_t46gg")
+attack_damage = 2.0
+metadata/_custom_type_script = "uid://dwjt6qd64607k"
+
 [connection signal="area_entered" from="ScanSphere" to="StateMachine/Idle" method="_on_scan_sphere_area_entered"]
 [connection signal="area_exited" from="ScanSphere" to="StateMachine/Pursuit" method="_on_scan_sphere_area_exited"]
 [connection signal="area_entered" from="AttackRange" to="StateMachine/Pursuit" method="_on_attack_range_area_entered"]
+[connection signal="timeout" from="AttackTimer" to="StateMachine/Attack" method="_on_attack_timer_timeout"]

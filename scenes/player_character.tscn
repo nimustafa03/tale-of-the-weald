@@ -15,7 +15,6 @@
 [ext_resource type="Texture2D" uid="uid://php074lxgjhi" path="res://assets/player/sp_idle/sp_idle_0007.png" id="8_dpr6s"]
 [ext_resource type="Script" uid="uid://bqwxl81bf401h" path="res://scripts/states/player/p_jump.gd" id="8_pxja8"]
 [ext_resource type="Texture2D" uid="uid://d0rxr2jcbxdn7" path="res://assets/player/sp_idle/sp_idle_0009.png" id="9_gyyv3"]
-[ext_resource type="Script" uid="uid://de7p6bbrswxkf" path="res://scripts/components/hitbox_component.gd" id="10_s7f3b"]
 [ext_resource type="Texture2D" uid="uid://77yhgb3c03wt" path="res://assets/player/sp_jump/sp_jump.png" id="11_bxieb"]
 [ext_resource type="Script" uid="uid://cbytxgc3ophoe" path="res://scripts/components/health_component.gd" id="11_c4hvp"]
 [ext_resource type="Texture2D" uid="uid://jxvup5ix4ng2" path="res://assets/player/sp_run/run_0000.png" id="11_kwd2h"]
@@ -26,6 +25,7 @@
 [ext_resource type="Texture2D" uid="uid://cwik3aephgg34" path="res://assets/player/sp_run/run_0004.png" id="15_pkxds"]
 [ext_resource type="Texture2D" uid="uid://cmw0roy8kohjp" path="res://assets/player/sp_run/run_0005.png" id="16_b8kkg"]
 [ext_resource type="Texture2D" uid="uid://l5kvbtin3fjq" path="res://assets/player/sp_run/run_0006.png" id="17_6rdx2"]
+[ext_resource type="Script" uid="uid://dtmbguol6uyqt" path="res://scripts/components/player_hitbox_component.gd" id="24_bxieb"]
 [ext_resource type="Script" uid="uid://bsluy0jer8fnu" path="res://scripts/components/collectable_component.gd" id="27_bxieb"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_uj7mf"]
@@ -112,7 +112,6 @@ radius = 0.463379
 
 [node name="playerCharacter" type="CharacterBody3D" node_paths=PackedStringArray("pDie")]
 collision_layer = 2
-collision_mask = 17
 script = ExtResource("1_56udc")
 pDie = NodePath("pStateMachine/pDie")
 
@@ -169,12 +168,12 @@ metadata/_custom_type_script = "uid://bbk7hmc17x0uu"
 script = ExtResource("5_iadup")
 metadata/_custom_type_script = "uid://bbk7hmc17x0uu"
 
-[node name="HitboxComponent" type="Area3D" parent="." node_paths=PackedStringArray("health_component", "collectable_component", "parent")]
+[node name="HitboxComponent" type="Area3D" parent="." node_paths=PackedStringArray("collectable_component", "health_component", "parent")]
 collision_layer = 2
-collision_mask = 20
-script = ExtResource("10_s7f3b")
-health_component = NodePath("../HealthComponent")
+collision_mask = 0
+script = ExtResource("24_bxieb")
 collectable_component = NodePath("../CollectableComponent")
+health_component = NodePath("../HealthComponent")
 parent = NodePath("..")
 metadata/_custom_type_script = "uid://de7p6bbrswxkf"
 

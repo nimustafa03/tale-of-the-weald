@@ -185,6 +185,7 @@ shape = SubResource("ConcavePolygonShape3D_qq5q4")
 [node name="testgrounds" type="Node3D" parent="NavigationRegion3D"]
 
 [node name="floor" type="StaticBody3D" parent="NavigationRegion3D/testgrounds"]
+collision_mask = 7
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="NavigationRegion3D/testgrounds/floor"]
 transform = Transform3D(64, 0, 0, 0, 20, 0, 0, 0, 64, 0, 0, 0)
