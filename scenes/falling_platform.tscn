@@ -1,0 +1,30 @@
+[gd_scene load_steps=4 format=3 uid="uid://2jkkgfhd8cyy"]
+
+[ext_resource type="Script" uid="uid://bd6f44bdx5tjv" path="res://scripts/falling_platform.gd" id="1_l3rcd"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_acb21"]
+height = 0.1
+radius = 1.0
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_iq02c"]
+top_radius = 1.0
+bottom_radius = 1.0
+height = 0.1
+
+[node name="FallingPlatform" type="StaticBody3D"]
+script = ExtResource("1_l3rcd")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("CylinderShape3D_acb21")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("CylinderMesh_iq02c")
+
+[node name="Area3D" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.086013585, 0)
+collision_mask = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+shape = SubResource("CylinderShape3D_acb21")
+
+[connection signal="area_entered" from="Area3D" to="." method="_on_area_3d_area_entered"]

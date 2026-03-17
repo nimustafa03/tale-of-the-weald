@@ -1,4 +1,4 @@
-[gd_scene load_steps=39 format=4 uid="uid://c5xblrrwat1e4"]
+[gd_scene load_steps=40 format=4 uid="uid://c5xblrrwat1e4"]
 
 [ext_resource type="PackedScene" uid="uid://cfmgsgc4u1jw2" path="res://scenes/player_character.tscn" id="1_j8ivh"]
 [ext_resource type="PackedScene" uid="uid://cmyh1p4gtykjt" path="res://scenes/fire.tscn" id="1_rnaij"]
@@ -24,6 +24,7 @@
 [ext_resource type="PackedScene" uid="uid://c5f0smfw3qq6w" path="res://scenes/generic_collectable.tscn" id="20_ap2hy"]
 [ext_resource type="PackedScene" uid="uid://dyav16wpg4tg7" path="res://scenes/spore_collectable.tscn" id="20_nlwlv"]
 [ext_resource type="PackedScene" uid="uid://dfh5r553kua0a" path="res://scenes/test_enemy.tscn" id="22_6gkjt"]
+[ext_resource type="PackedScene" uid="uid://2jkkgfhd8cyy" path="res://scenes/falling_platform.tscn" id="25_kub5s"]
 
 [sub_resource type="GDScript" id="GDScript_nks25"]
 script/source = "extends Node3D
@@ -304,3 +305,6 @@ metadata/_custom_type_script = "uid://b5c7xx2kg7a2"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D/StaticBody3D"]
 shape = SubResource("ConcavePolygonShape3D_nks25")
+
+[node name="FallingPlatform" parent="." instance=ExtResource("25_kub5s")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -29.578796, 4.121312, -33.270157)
