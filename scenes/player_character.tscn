@@ -1,4 +1,4 @@
-[gd_scene load_steps=37 format=3 uid="uid://cfmgsgc4u1jw2"]
+[gd_scene load_steps=38 format=3 uid="uid://cfmgsgc4u1jw2"]
 
 [ext_resource type="Script" uid="uid://dn2xyye3lsd5a" path="res://scripts/player.gd" id="1_56udc"]
 [ext_resource type="Texture2D" uid="uid://c378r060garon" path="res://assets/player/sp_fall/sp_fall.png" id="2_d7btg"]
@@ -31,6 +31,7 @@
 [ext_resource type="Script" uid="uid://dtmbguol6uyqt" path="res://scripts/components/player_hitbox_component.gd" id="24_bxieb"]
 [ext_resource type="Script" uid="uid://bsluy0jer8fnu" path="res://scripts/components/collectable_component.gd" id="27_bxieb"]
 [ext_resource type="PackedScene" uid="uid://ran2a6jg0iv0" path="res://scenes/pause_menu.tscn" id="31_dpr6s"]
+[ext_resource type="PackedScene" uid="uid://bg87dxyi3nvi1" path="res://scenes/interface.tscn" id="32_gyyv3"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_uj7mf"]
 radius = 0.50769
@@ -238,6 +239,11 @@ one_shot = true
 [node name="PauseMenu" parent="." instance=ExtResource("31_dpr6s")]
 visible = false
 
-[connection signal="pressed" from="PauseMenu/Control/Continue" to="." method="unpause"]
+[node name="Control" parent="PauseMenu" index="0"]
+process_mode = 3
+
+[node name="Interface" parent="." instance=ExtResource("32_gyyv3")]
+
+[connection signal="pressed" from="PauseMenu/Control/VBoxContainer/Continue" to="PauseMenu" method="unpause"]
 
 [editable path="PauseMenu"]

@@ -9,9 +9,10 @@ class_name Player
 @onready var camera : Camera3D = $springPivot3D/Camera3D
 @onready var sporeAttackScene = load("res://scenes/spore_attack.tscn")
 @onready var sporeAttackCooldown = $SporeAttackCooldown
-@onready var pauseMenu = $PauseMenu
+#@onready var pauseMenu = $PauseMenu
 @onready var shadow_ray = $ShadowRay
 @onready var shadow_decal : Decal = $ShadowDecal
+@onready var collectable_component = $CollectableComponent
 
 var was_on_floor : bool = false
 
@@ -22,7 +23,7 @@ var was_on_floor : bool = false
 func _ready():
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	stateMachine.init(self)
-
+	
 
 func _unhandled_key_input(event):
 	stateMachine.process_input(event)
@@ -31,13 +32,7 @@ func _input(event):
 	if event.is_action_pressed("game_attack"):
 		if sporeAttackCooldown.is_stopped():
 			spore_attack()
-	
-	if event.is_action_pressed("ui_cancel"):
-		get_tree().paused = true
-		pauseMenu.show()
-		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
-
-
+		
 
 func update_shadow_logic():
 	shadow_ray.force_shapecast_update()
@@ -87,14 +82,6 @@ func set_active(active):
 	set_process_input(active)
 	set_process_unhandled_key_input(active)
 
-#func pause_or_unpause_game(): ## MOVER ESTO A UN CONTROLADOR DE GUI QUE NO SE PUEDA PAUSAR (PORQUE EVIDENTEMENTE ESO CONGELA EL JUEGO, AL NO PODER PROCESAR INPUTS)
-#	var isPaused = get_tree().paused
-#	if isPaused:
-##		Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
-#	else:
-##		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
-
-
 func apply_squash_and_stretch(target_modifier: Vector3, duration_in: float = 0.1, duration_out: float = 0.2):
 	var tween = create_tween()
 	tween.set_trans(Tween.TRANS_QUAD)
@@ -113,8 +100,3 @@ func spore_attack():
 	await get_tree().create_timer(1).timeout
 	attack_instance.queue_free()
 	
-	
-func unpause():
-	get_tree().paused = false
-	pauseMenu.hide()
-	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)

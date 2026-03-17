@@ -1,0 +1,126 @@
+[gd_scene load_steps=7 format=3 uid="uid://bg87dxyi3nvi1"]
+
+[ext_resource type="Script" uid="uid://diir72qonk35y" path="res://scripts/interface.gd" id="1_tg63u"]
+[ext_resource type="Texture2D" uid="uid://bbcphvxh5m3px" path="res://assets/collectables/spore/spore_0000.png" id="2_t72xj"]
+[ext_resource type="Texture2D" uid="uid://cuhu4tldiv4pp" path="res://assets/collectables/primitive.png" id="3_s0di0"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_t72xj"]
+bg_color = Color(0.8717617, 0, 0.18096775, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.7798235, 0.62048495, 0.12107325, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+anti_aliasing = false
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_uidac"]
+bg_color = Color(0.77223855, 0.41256225, 0.98398405, 1)
+corner_radius_top_left = 90
+corner_radius_top_right = 90
+corner_radius_bottom_right = 90
+corner_radius_bottom_left = 90
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_s0di0"]
+bg_color = Color(0.4, 0.22352941, 0.52156866, 1)
+border_color = Color(0.41587663, 0.0011254895, 0.5935134, 1)
+corner_radius_top_left = 90
+corner_radius_top_right = 90
+corner_radius_bottom_right = 90
+corner_radius_bottom_left = 90
+shadow_color = Color(0.5295993, 0.299669, 0.6902369, 0.6)
+
+[node name="Interface" type="Control"]
+process_mode = 1
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("1_tg63u")
+
+[node name="IntefaceLayer" type="CanvasLayer" parent="."]
+process_mode = 1
+layer = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="IntefaceLayer"]
+offset_right = 489.0
+offset_bottom = 94.0
+
+[node name="Health" type="Label" parent="IntefaceLayer/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 32
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HealthBar" type="ProgressBar" parent="IntefaceLayer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_styles/fill = SubResource("StyleBoxFlat_t72xj")
+max_value = 10.0
+show_percentage = false
+
+[node name="PanelContainer" type="PanelContainer" parent="IntefaceLayer"]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -267.0
+offset_bottom = 113.0
+grow_horizontal = 0
+
+[node name="MarginContainer" type="MarginContainer" parent="IntefaceLayer/PanelContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="GridContainer" type="GridContainer" parent="IntefaceLayer/PanelContainer/MarginContainer"]
+layout_mode = 2
+theme_override_constants/h_separation = 20
+columns = 4
+
+[node name="SporesTexture" type="TextureRect" parent="IntefaceLayer/PanelContainer/MarginContainer/GridContainer"]
+layout_mode = 2
+texture = ExtResource("2_t72xj")
+expand_mode = 2
+stretch_mode = 5
+
+[node name="SporeCollectable" type="Label" parent="IntefaceLayer/PanelContainer/MarginContainer/GridContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 64
+text = "
+"
+horizontal_alignment = 1
+
+[node name="PrimitiveTexture" type="TextureRect" parent="IntefaceLayer/PanelContainer/MarginContainer/GridContainer"]
+layout_mode = 2
+texture = ExtResource("3_s0di0")
+expand_mode = 2
+stretch_mode = 5
+
+[node name="PrimitiveCollectable" type="Label" parent="IntefaceLayer/PanelContainer/MarginContainer/GridContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 64
+horizontal_alignment = 1
+
+[node name="SporeAttackCoolDownBar" type="ProgressBar" parent="IntefaceLayer"]
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -242.0
+offset_top = -203.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_styles/background = SubResource("StyleBoxFlat_uidac")
+theme_override_styles/fill = SubResource("StyleBoxFlat_s0di0")
+fill_mode = 3
+show_percentage = false
