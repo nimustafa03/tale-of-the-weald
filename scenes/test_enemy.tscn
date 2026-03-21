@@ -100,7 +100,7 @@ shape = SubResource("CylinderShape3D_1y3pe")
 
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
 
-[node name="SporeAttackCooldown" type="Timer" parent="."]
+[node name="CooldownTimer" type="Timer" parent="."]
 one_shot = true
 
 [connection signal="area_entered" from="ScanSphere" to="StateMachine/Idle" method="_on_scan_sphere_area_entered"]
