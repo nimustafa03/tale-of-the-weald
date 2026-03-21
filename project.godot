@@ -92,3 +92,4 @@ game_attack={
 3d_physics/layer_3="enemy"
 3d_physics/layer_4="cameracollision"
 3d_physics/layer_5="collectables"
+3d_physics/layer_6="switches"

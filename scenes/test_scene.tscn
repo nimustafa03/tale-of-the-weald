@@ -1,4 +1,4 @@
-[gd_scene load_steps=37 format=4 uid="uid://c5xblrrwat1e4"]
+[gd_scene load_steps=44 format=4 uid="uid://c5xblrrwat1e4"]
 
 [ext_resource type="PackedScene" uid="uid://cfmgsgc4u1jw2" path="res://scenes/player_character.tscn" id="1_j8ivh"]
 [ext_resource type="PackedScene" uid="uid://cmyh1p4gtykjt" path="res://scenes/fire.tscn" id="1_rnaij"]
@@ -25,6 +25,8 @@
 [ext_resource type="PackedScene" uid="uid://dyav16wpg4tg7" path="res://scenes/spore_collectable.tscn" id="20_nlwlv"]
 [ext_resource type="PackedScene" uid="uid://dfh5r553kua0a" path="res://scenes/test_enemy.tscn" id="22_6gkjt"]
 [ext_resource type="PackedScene" uid="uid://2jkkgfhd8cyy" path="res://scenes/falling_platform.tscn" id="25_kub5s"]
+[ext_resource type="Script" uid="uid://ba4cg8p8sg761" path="res://scripts/components/switch types/coll_switch_timed_hitbox_component.gd" id="26_sstcd"]
+[ext_resource type="Script" uid="uid://c37k3f2b085i4" path="res://scripts/switchable collision types/switchable_collision.gd" id="27_2oq4n"]
 
 [sub_resource type="GDScript" id="GDScript_nks25"]
 script/source = "extends Node3D
@@ -103,6 +105,19 @@ uv1_scale = Vector3(5, 5, 5)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_3qnke"]
 size = Vector3(20, 1, 130)
+
+[sub_resource type="SphereMesh" id="SphereMesh_kub5s"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_bnteq"]
+radius = 0.66691446
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_oimyc"]
+radius = 1.4155294
+
+[sub_resource type="BoxMesh" id="BoxMesh_5csvr"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_fftn7"]
+size = Vector3(5.791504, 4.998047, 1)
 
 [node name="Main" type="Node3D"]
 script = SubResource("GDScript_nks25")
@@ -264,3 +279,35 @@ PLAYER_PATH = NodePath("../PlayerCharacter")
 
 [node name="FallingPlatform" parent="." instance=ExtResource("25_kub5s")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -29.578796, 4.121312, -33.270157)
+
+[node name="testSwitch" type="CharacterBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.4761057, 1.1668212, -16.204086)
+collision_layer = 32
+motion_mode = 1
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="testSwitch"]
+mesh = SubResource("SphereMesh_kub5s")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="testSwitch"]
+shape = SubResource("SphereShape3D_bnteq")
+
+[node name="Hitbox" type="Area3D" parent="testSwitch" node_paths=PackedStringArray("AFFECTED_COLLISION")]
+collision_layer = 32
+collision_mask = 0
+script = ExtResource("26_sstcd")
+AFFECTED_COLLISION = NodePath("../../testSwitchableCollision")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="testSwitch/Hitbox"]
+shape = SubResource("SphereShape3D_oimyc")
+
+[node name="testSwitchableCollision" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.903593, 4.7683716e-07, -19.131157)
+script = ExtResource("27_2oq4n")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="testSwitchableCollision"]
+transform = Transform3D(5.6849327, 0, 0, 0, 4.356326, 0, 0, 0, 1, 0, 2.2830114, 0)
+mesh = SubResource("BoxMesh_5csvr")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="testSwitchableCollision"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.024169922, 1.9990234, 0)
+shape = SubResource("BoxShape3D_fftn7")

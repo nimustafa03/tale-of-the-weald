@@ -5,7 +5,7 @@ class_name HitboxComponent
 @export var PARENT : Node3D
 
 
-func damage(attack : Attack):
+func receive_attack(attack : Attack):
 	if HEALTH_COMPONENT:
 		HEALTH_COMPONENT.damage(attack)
 	

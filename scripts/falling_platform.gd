@@ -9,16 +9,16 @@ extends StaticBody3D
 
 func fall() -> void:
 	await get_tree().create_timer(FALLING_WAIT).timeout
-	detector.set_disabled(true)
-	collision.set_disabled(true)
-	mesh.set_visible(false) ## More complex animations could be played.
+	detector.set_deferred("disabled", true)
+	collision.set_deferred("disabled", true)
+	mesh.set_deferred("visible", false) ## Se podrían reproducir animaciones más complejas.
 	restart()
 
 func restart() -> void:
 	await get_tree().create_timer(PLATFORM_RESTART_WAIT).timeout
-	detector.set_disabled(false)
-	collision.set_disabled(false)
-	mesh.set_visible(true)
+	detector.set_deferred("disabled", false)
+	collision.set_deferred("disabled", false)
+	mesh.set_deferred("visible", true)
 
 func _on_area_3d_area_entered(area):
 	if area is PlayerHitboxComponent:
