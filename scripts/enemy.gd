@@ -1,4 +1,4 @@
-extends CharacterBody3D
+extends InteractableEntity
 class_name Enemy
 
 @onready var animations = $AnimatedSprite3D

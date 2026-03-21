@@ -5,5 +5,5 @@ class_name Attack
 
 
 func _on_area_3d_area_entered(area: HitboxComponent) -> void:
-	if area.PARENT is Enemy:
+	if area.PARENT is CharacterBody3D:
 		area.damage(self)
